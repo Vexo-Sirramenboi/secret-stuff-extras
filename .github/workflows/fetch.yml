@@ -1,0 +1,26 @@
+name: Fetch Larp Client 1.14.4
+
+on: workflow_dispatch
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download game
+        run: |
+          curl -L --fail -o index.html "https://gx-launcher.github.io/game/Larp%20Client%201.14.4/index.html"
+          ls -l index.html
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add Larp Client 1.14.4 as index.html"
+          git push
